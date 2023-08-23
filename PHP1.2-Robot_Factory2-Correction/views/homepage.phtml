@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr-FR">
+<head>
+    <meta charset="UTF-8">
+    <title>Robot Factory</title>
+</head>
+<body>
+    <h1>Robot Factory</h1>
+
+    <!-- Alternative syntax is useful to inline control structures into HTML. -->
+    <?php if (empty($_POST)): ?>
+        <form method="POST">
+            <label for="name">Comment s'appelle votre robot ?</label>
+            <br />
+            <input id="name" type="text" name="name" />
+
+            <br />
+
+            <button type="submit">Générer mon robot</button>
+        </form>
+    <?php else: ?>
+        <p><a href="/"><= Générer un nouveau robot</a></p>
+
+        <!-- Yeah, we have access to the variables declared in index.php! Cool. (: -->
+        <p>Salut, humain. Je suis <?= $robotName ?>.</p>
+
+        <p>Nous sommes le <?= $date ?>, il est <?= $hour ?>.</p>
+
+        <p>J'ai choisi le nombre <?= $randomNumber ?>. C'est un nombre <?= $parityMsg ?>.</p>
+
+        <p>Mon nom à l'envers s'écrit <?= $reversedName ?>. Ah. Ah. Ah.</p>
+
+        <p><?= $robotMoralDecision ?></p>
+    <?php endif; ?>
+
+</body>
+</html>
