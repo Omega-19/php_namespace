@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr-FR">
+<head>
+    <meta charset="UTF-8">
+    <title>Robot Factory</title>
+    <link rel="stylesheet" href="../assets/style.css" type="text/css">
+</head>
+<body>
+    <h1>Robot Factory</h1>
+
+    <?php if (empty($_POST)): ?>
+        <form method="POST">
+            <label for="name">
+              Comment s'appelle votre robot ? <strong>Format : XX-9999</strong>
+            </label>
+            <br />
+            <!-- The attribute `pattern` prevents form submission if the given value -->
+            <!-- does not respect the requested RegExp pattern. -->
+            <input id="name" type="text" name="name" pattern="<?= ROBOT_NAME_PATTERN ?>" />
+
+            <hr />
+
+            <p>Votre robot est-il diabolique ?</p>
+            <div>
+                <input id="evilness_yes" type="radio" name="evilness" value="yes">
+                <label for="evilness_yes">Oui</label>
+            </div>
+            <div>
+                <input id="evilness_no" type="radio" name="evilness" value="no">
+                <label for="evilness_no">Non</label>
+            </div>
+            <div>
+                <input id="evilness_fate" type="radio" name="evilness" value="fate">
+                <label for="evilness_fate">Croisons les doigts</label>
+            </div>
+
+            <hr />
+
+            <button type="submit">Générer mon robot</button>
+        </form>
+    <?php else: ?>
+        <p><a href="/"><= Générer un nouveau robot</a></p>
+
+        <p>Salut, humain. Je suis <?= $robotName ?>.</p>
+
+        <p>Nous sommes le <?= $date ?>, il est <?= $hour ?>.</p>
+
+        <p>J'ai choisi le nombre <?= $randomNumber ?>. C'est un nombre <?= $parityMsg ?>.</p>
+
+        <p>Mon nom à l'envers s'écrit <?= $reversedName ?>. Ah. Ah. Ah.</p>
+
+        <p class="<?php if ($robotEvil): ?>angry-speak<?php endif; ?>">
+            <?= $robotMoralDecision ?>
+        </p>
+    <?php endif; ?>
+
+</body>
+</html>
