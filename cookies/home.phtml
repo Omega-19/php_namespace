@@ -1,3 +1,7 @@
+<?php
+require_once('./download.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,14 +66,17 @@
     
     Lorsque vous définissez `enctype = "multipart/form-data", cela signifie que les données du formulaire seront encodées sous la forme d'un contenu binaire multipart. Ce type d'encodage est utilisé pour les formulaires contenant des champs de téléchargement de fichiersn car il permet de transférer des fichiers binaires, tels que les images, les vidéos, etc...., en plus de données de texte.
 -->
+
             <form action="server.php" method="post" enctype="multipart/form-data">
                 <div class="mb-3">
+                    <!-- empecher le chargement de fichiers lour -->
+                    <input name="MAX_FILE_SIZE" type="hidden" value="3000000">
                     <label for="file" class="form-label">Importez un fichier</label><br>
                     <input type="file" class="form-control" name="photo_profile" id="file"><br>
                     <button class="btn btn-primary"  name="submit">Submit</button>
                 </div>
             </form>
-
+            <a href="download.php?file=img-64edec614e02c.jpg">Télécharger l'image</a>
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

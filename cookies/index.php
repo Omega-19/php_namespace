@@ -1,6 +1,7 @@
 <?php
 require("./home.phtml");
-require "./generic_fonctions.php";
+phpinfo();
+exit;
 // session_save_path("C:/_programmes/laragon-6.0.0/tmp");
 
 // #Fonction qui démarre une session côté serveur
@@ -51,5 +52,3 @@ require "./generic_fonctions.php";
 // // $data =unserialize($serializedData);
 
 ?>
-
-    

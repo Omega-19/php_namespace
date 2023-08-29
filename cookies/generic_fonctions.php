@@ -1,4 +1,4 @@
-<?php
+ <?php
 function dd($data){
     echo "<pre>";
     print_r($data);
@@ -10,3 +10,4 @@ function vd($data){
     var_dump($data);
     echo "</pre>";
 }
+?> 
