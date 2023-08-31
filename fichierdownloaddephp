@@ -1,0 +1,117 @@
+<?php
+
+require("./generic_fonctions.php");
+
+// $successMessage = 'Fichier uploader<br>';
+// $errorMessage = 'Pas de fichier uploader<br>';
+// $filesError = 'Désolé, votre fichier est trop volumineux. La taille réquis est de 3000000';
+// $target_dir = "./uploads/";
+// define('MAX_SIZE', 300000);
+
+// #L'utilisateur à uploader un fichier
+// if (isset($_POST['submit']) && isset($_FILES['photo_profile']) && !empty($_FILES['photo_profile']['name'])) {
+
+//       #Récupérer les informations du fichier (nom, extension, chemin)
+//       $fileName = $_FILES['photo_profile']['name'];
+//       $tmpFiles = $_FILES['photo_profile']['tmp_name'];
+//       $extensionFiles = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+//       // Accepter que les fichiers jpeg, jpg, png
+
+//       $allowedFiles = ["jpeg", "png", "jpg"];
+
+//       if (in_array($extensionFiles, $allowedFiles)) {
+//             // vérifier qu'il n'y a pas d'erreurs
+//             if (($_FILES['photo_profile']['error']) === 0) {
+
+//                   if ($_FILES['photo_profile']['size'] <= MAX_SIZE) {
+//                         move_uploaded_file($tmpFiles, $target_dir . uniqid() . '.' .$extensionFiles);
+//                   } else {
+//                         echo 'Désolé, votre fichier est trop volumineux. La taille réquis est de 300000<br>';
+//                   }
+
+//             } else {
+//                   echo "Désolé, une erreur s'est produite lors du téléchargement de votre fichier<br>";
+//             }
+//             echo 'Good files is upload<br>';
+//       } else {
+//             echo "Please the file of type '$extensionFiles' not allow !<br>";
+//             echo 'The files allowed is ' . implode(", ", $allowedFiles) . '<br>';
+//       }
+
+//       echo $successMessage;
+//       #Sauvegarder le fichier sur le serveur
+
+// } else {
+
+//       #rediriger ce dernier sur la page du formulaire
+//       header("Location: index.php?'$errorMessage'");
+//       echo $errorMessage;
+// }
+
+define("MAX_SIZE", 3000000); //
+
+//l'utilisateur à uploader un fichier
+
+if (isset($_POST['submit']) && isset($_FILES['photo_profile'])) {
+
+    // récupérer les informations du fichier (nom, extension, chemin)
+    // dd("photo_profile");
+    $fileName = $_FILES['photo_profile']['name'];
+    $tmpDir = $_FILES['photo_profile']['tmp_name'];
+    // echo "fileName = " .  $fileName;
+    // echo "tmpDir = " .  $tmpDir;
+
+
+    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+    // echo "file extension = $fileExtension";
+    //ne accepter que les fichiers de type jpeg, png, jpg
+    // echo in_array("jpeg", ["png", "jpg"]);
+
+    // if (in_array("jpeg", ["png", "jpg"])) {
+    //     echo "bon files";
+    // } else {
+    //     echo " Fichiers $fileExtension non autorisés !";
+    // }
+
+    //autre possibilité 
+
+    $allowedFiles = ["jpg", "png", "jpeg"];
+
+    if (in_array($fileExtension, $allowedFiles)) {
+        # vérifier qu'il n'y a pas d'erreurs
+        if (!$_FILES["photo_profile"]["error"] === 0) {
+            # il n'ya pas d'erreur;
+            if ($_FILES["photo_profile"]["size"] < MAX_SIZE) {
+                # La taille est inférieure à 3M
+                $uploadDir = "./upload/";
+                $newFileName = $uploadDir . uniqid("img-") . "." . $fileExtension;
+                move_uploaded_file($tmpDir, $newFileName);
+                echo "good";
+
+            } else {
+                # la taille est trop élevée
+                echo "Fichier trop volumineux.";
+            }
+        } else {
+            // echo "une erreur a été rencontrée lors du chargement du fichier. Veuillez réessayer, svp....";
+        }
+        //vérifier la taille du fichier
+    } else {
+        echo "Fichiers $fileExtension non autorisé !<br>";
+        echo "Formats autorisés: " . implode(",", $allowedFiles);
+    }
+    ;
+    //Les valeurs false en 0 false, 0, -0,0, "", ,[],null,                                                             
+    // sauvegarder le fichier sur le serveur
+    #Fonction qui sauvegarde le fichier à l'endroit désiré
+
+
+
+} else {
+
+    //rediriger ce dernier sur la page du formulaire
+    header('Location:/index.php?error=no_file_uploaded');
+
+}
+?>
