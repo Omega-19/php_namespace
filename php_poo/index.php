@@ -1,28 +1,17 @@
 <?php
-include "./generic_functions.php";
-// include "./User.php";
+declare(strict_types=1);
+use app\Programmer;
 
-/**
- *  spl_autoload_register
- *Elle permet de charger automatiquement les classes.Elle prend en param une fonction et en argument une classe
- */
-spl_autoload_register(function ($class_name) {
-require $class_name . ".php";
-});
+require __DIR__ . "/vendor/autoload.php";
+
+// var_dump(new User());
 
 
-$x = "User";
-$u1 = new $x(); //pareil à $u1 = new User();
-
+$u1 = new Programmer("John", "Doe", 24, ["JS", "CSS"]);
+echo "<pre>";
 // var_dump($u1);
-// dd($u1);
+print_r($u1);
+echo "</pre>";
 
 
-//L'opérateur d'objet (->)
-
-// echo $u1->nom;
-// echo $u1->prenom;
-$u1->present();
-
-echo User::pieds;//2
 ?>

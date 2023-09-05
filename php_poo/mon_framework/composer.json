@@ -1,0 +1,15 @@
+{
+    "name": "nicole.vigan/mon_framework",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Omega-19",
+            "email": "vigannicole1@gmail.com"
+        }
+    ],
+    "require": {}
+}
